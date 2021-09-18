@@ -109,7 +109,7 @@ namespace Krestikinoliki {
 			// 
 			this->âåğíóòüñÿToolStripMenuItem->Name = L"âåğíóòüñÿToolStripMenuItem";
 			this->âåğíóòüñÿToolStripMenuItem->Size = System::Drawing::Size(224, 26);
-			this->âåğíóòüñÿToolStripMenuItem->Text = L"Âåğíóòüñÿ";
+			this->âåğíóòüñÿToolStripMenuItem->Text = L"Âåğíóòüñÿ â ìåíş";
 			this->âåğíóòüñÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::âåğíóòüñÿToolStripMenuItem_Click);
 			// 
 			// âûõîäToolStripMenuItem
@@ -173,9 +173,9 @@ namespace Krestikinoliki {
 #pragma endregion
 		//     ïîëÿ èãğû
 		public: int rows;
-		public: int columns;
-	    public: int length;
-		public: int selectedGameMode;
+				int columns;
+				int length;
+				int selectedGameMode;
 		private: Random^ rand;
 
 			   // ìåòîäû èãğû

@@ -1,11 +1,11 @@
-#include "GameMap.h"
+п»ї#include "GameMap.h"
 
 GameMap::GameMap()
 {
 	size.x = 0;
 	size.y = 0;
 
-	length = 0;  //длина выигрышной комбинации
+	length = 0;  //РґР»РёРЅР° РІС‹РёРіСЂС‹С€РЅРѕР№ РєРѕРјР±РёРЅР°С†РёРё
 
 	map = new int* [size.x];
 	for (int i = 0; i < size.x; i++) {
@@ -16,14 +16,14 @@ GameMap::GameMap()
 GameMap::GameMap(Field2 f_size, int)
 {
 	size = f_size;
-	length = 3; //устанавливаем размер выигрышной цепочки
+	length = 3; //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂР°Р·РјРµСЂ РІС‹РёРіСЂС‹С€РЅРѕР№ С†РµРїРѕС‡РєРё
 
 	map = new int* [size.x];
 	for (int i = 0; i < size.x; i++) {
 		map[i] = new int[size.y];
 	}
 
-	//обнуляем элементы поля
+	//РѕР±РЅСѓР»СЏРµРј СЌР»РµРјРµРЅС‚С‹ РїРѕР»СЏ
 	for (int i = 0; i < size.x; i++) {
 		for (int j = 0; j < size.y; j++) {
 			map[i][j] = 0;
@@ -35,14 +35,14 @@ GameMap::GameMap(int i, int j, int)
 {
 	size.x = i;
 	size.y = j;
-	length = 3; //устанавливаем размер выигрышной цепочки
+	length = 3; //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂР°Р·РјРµСЂ РІС‹РёРіСЂС‹С€РЅРѕР№ С†РµРїРѕС‡РєРё
 
 	map = new int* [size.x];
 	for (int i = 0; i < size.x; i++) {
 		map[i] = new int[size.y];
 	}
 
-	//обнуляем элементы поля
+	//РѕР±РЅСѓР»СЏРµРј СЌР»РµРјРµРЅС‚С‹ РїРѕР»СЏ
 	for (int i = 0; i < size.x; i++) {
 		for (int j = 0; j < size.y; j++) {
 			map[i][j] = 0;
@@ -52,25 +52,25 @@ GameMap::GameMap(int i, int j, int)
 
 GameMap::~GameMap()
 {
-	//очищаем матрицу
+	//РѕС‡РёС‰Р°РµРј РјР°С‚СЂРёС†Сѓ
 	for (int i = 0; i < size.x; i++) {
 		delete[] map[i];
 	}
 	delete[] map;
 }
 
-bool GameMap::SetPosition(Field2 cell, int c)//данные нашей ячейки/ то кем мы ходим
+bool GameMap::SetPosition(Field2 cell, int c)//РґР°РЅРЅС‹Рµ РЅР°С€РµР№ СЏС‡РµР№РєРё/ С‚Рѕ РєРµРј РјС‹ С…РѕРґРёРј
 {
-	if (IsEmpty(cell)) {  //если свободна
-		map[cell.x][cell.y] = c; //запонимаем, что походили
+	if (IsEmpty(cell)) {  //РµСЃР»Рё СЃРІРѕР±РѕРґРЅР°
+		map[cell.x][cell.y] = c; //Р·Р°РїРѕРЅРёРјР°РµРј, С‡С‚Рѕ РїРѕС…РѕРґРёР»Рё
 		return true;
 	}
 	else {
-		return false; //если занята
+		return false; //РµСЃР»Рё Р·Р°РЅСЏС‚Р°
 	}
 }
 
-bool GameMap::IsEmpty(Field2 cell)//узнаем свободна ли ячейка
+bool GameMap::IsEmpty(Field2 cell)//СѓР·РЅР°РµРј СЃРІРѕР±РѕРґРЅР° Р»Рё СЏС‡РµР№РєР°
 {
 	if (map[cell.x][cell.y] == 0) {
 		return true;
@@ -80,7 +80,7 @@ bool GameMap::IsEmpty(Field2 cell)//узнаем свободна ли ячейка
 	}
 }
 
-bool GameMap::IsEmpty(int i, int j) //узнаем свободна ли ячейка через координаты
+bool GameMap::IsEmpty(int i, int j) //СѓР·РЅР°РµРј СЃРІРѕР±РѕРґРЅР° Р»Рё СЏС‡РµР№РєР° С‡РµСЂРµР· РєРѕРѕСЂРґРёРЅР°С‚С‹
 {
 	if (map[i][j] == 0) {
 		return true;
@@ -90,10 +90,10 @@ bool GameMap::IsEmpty(int i, int j) //узнаем свободна ли ячейка через координаты
 	}
 }
 
-void GameMap::SetMap(Field2 f_size, int) //задаёт карту(как конструктор с параметрами)
+void GameMap::SetMap(Field2 f_size, int l) //Р·Р°РґР°С‘С‚ РєР°СЂС‚Сѓ(РєР°Рє РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё)
 {
 	size = f_size;
-	length = 3; //устанавливаем размер выигрышной цепочки
+	length = l; //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂР°Р·РјРµСЂ РІС‹РёРіСЂС‹С€РЅРѕР№ С†РµРїРѕС‡РєРё
 
 	map = new int* [size.x];
 	for (int i = 0; i < size.x; i++) {
@@ -107,18 +107,18 @@ void GameMap::SetMap(Field2 f_size, int) //задаёт карту(как конструктор с параме
 	}
 }
 
-void GameMap::SetMap(int i, int j, int)
+void GameMap::SetMap(int i, int j, int l)
 {
 	size.x = i;
 	size.y = j;
-	length = 3; //устанавливаем размер выигрышной цепочки
+	length = l; //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЂР°Р·РјРµСЂ РІС‹РёРіСЂС‹С€РЅРѕР№ С†РµРїРѕС‡РєРё
 
 	map = new int* [size.x];
 	for (int i = 0; i < size.x; i++) {
 		map[i] = new int[size.y];
 	}
 
-	//обнуляем матрицу
+	//РѕР±РЅСѓР»СЏРµРј РјР°С‚СЂРёС†Сѓ
 	for (int i = 0; i < size.x; i++) {
 		for (int j = 0; j < size.y; j++) {
 			map[i][j] = 0;
@@ -142,14 +142,14 @@ int GameMap::CheckList(vector<int> a)
 		return 0;
 	}
 
-	//флажки победы игроков
+	//С„Р»Р°Р¶РєРё РїРѕР±РµРґС‹ РёРіСЂРѕРєРѕРІ
 	bool winPlayer1 = false;
 	bool winPlayer2 = false;
 
 	int count1 = 0, count2 = 0;
 
-	//считаем баллы
-	//НЕ ПОНЯЛА
+	//СЃС‡РёС‚Р°РµРј Р±Р°Р»Р»С‹
+	//РќР• РџРћРќРЇР›Рђ
 	for (int i = 0; i < a.size(); i++) {
 		for (int j = i; j < i + length; j++) {
 			if (j < a.size()) {
@@ -185,22 +185,22 @@ int GameMap::CheckList(vector<int> a)
 
 	}
 
-	//высчитываем результат
+	//РІС‹СЃС‡РёС‚С‹РІР°РµРј СЂРµР·СѓР»СЊС‚Р°С‚
 	if (winPlayer1 && winPlayer2) {
-		return 3; //ничья
+		return 3; //РЅРёС‡СЊСЏ
 	}
 	else if (!winPlayer1 && winPlayer2) {
-		return 2;//выиграл второй игрок
+		return 2;//РІС‹РёРіСЂР°Р» РІС‚РѕСЂРѕР№ РёРіСЂРѕРє
 	}
 	else if (winPlayer1 && !winPlayer2) {
-		return 1; //выиграл первый игрок
+		return 1; //РІС‹РёРіСЂР°Р» РїРµСЂРІС‹Р№ РёРіСЂРѕРє
 	}
 	else return 0;
 }
 
 int GameMap::CheckWinner()
 {
-	//проходим по карте в поиске последвательности для выигрыша
+	//РїСЂРѕС…РѕРґРёРј РїРѕ РєР°СЂС‚Рµ РІ РїРѕРёСЃРєРµ РїРѕСЃР»РµРґРІР°С‚РµР»СЊРЅРѕСЃС‚Рё РґР»СЏ РІС‹РёРіСЂС‹С€Р°
 	int state = 0;
 	vector<int> check;
 
@@ -210,34 +210,34 @@ int GameMap::CheckWinner()
 	[][][]
 	*/
 
-	//1 ----- проходим по всем горизонталям
+	//1 ----- РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РіРѕСЂРёР·РѕРЅС‚Р°Р»СЏРј
 	for (int i = 0; i < size.x; i++) {
 		for (int j = 0; j < size.y; j++) {
 			check.push_back(map[i][j]);
 		}
 
-		//проверяем
+		//РїСЂРѕРІРµСЂСЏРµРј
 		state = CheckList(check);
 		check.clear();
 
 		if (state == 3){
-			return 3;//ничья
+			return 3;//РЅРёС‡СЊСЏ
 		}
 		else if (state == 2) {
-			return 2;//второй игрок
+			return 2;//РІС‚РѕСЂРѕР№ РёРіСЂРѕРє
 		}
 		else if (state == 1) {
-			return 1;//первый игрок
+			return 1;//РїРµСЂРІС‹Р№ РёРіСЂРѕРє
 		}
 	}
 
-	//2 ----- проходим по всем вертикалям
+	//2 ----- РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РІРµСЂС‚РёРєР°Р»СЏРј
 	for (int i = 0; i < size.x; i++) {
 		for (int j = 0; j < size.y; j++) {
 			check.push_back(map[j][i]);
 		}
 
-		//проверяем
+		//РїСЂРѕРІРµСЂСЏРµРј
 		state = CheckList(check);
 		check.clear();
 		
@@ -252,49 +252,104 @@ int GameMap::CheckWinner()
 		}
 	}
 
-	//3 ------проходим по двум диагоналям
+	//3 ------РїСЂРѕС…РѕРґРёРј РїРѕ РґРІСѓРј РґРёР°РіРѕРЅР°Р»СЏРј
+	for (int i = 0; i < size.x; ++i)
+	{
+		for (int j = 0; i + j < size.y; ++j) {
+			check.push_back(map[i + j][j]);
+		}
 
-	//Главная диагональ
-	for (int i = 0; i < size.y; i++) {
-		check.push_back(map[i][i]);
+		//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬
+		state = CheckList(check);
+		check.clear();
+
+		if (state == 3) {
+			return 3;//Г­ГЁГ·ГјГї
+		}
+		else if (state == 2) {
+			return 2;//ГЇГ®ГЎГҐГ¤ГЁГ« 2
+		}
+		else if (state == 1) {
+			return 1;//ГЇГ®ГЎГҐГ¤ГЁГ« 1
+		}
 	}
 
-	state = CheckList(check);
-	check.clear();
+	//ГЏГ®Г¤ ГЈГ«Г ГўГ­Г®Г© Г¤ГЁГ ГЈГ®Г­Г Г«ГјГѕ
+	for (int i = 1; i < size.x; ++i)
+	{
+		for (int j = 0; i + j < size.y; ++j) {
+			check.push_back(map[i + j][j]);
+		}
 
-	if (state == 3) {
-		return 3; //ничья
-	}
-	else if (state == 2) {
-		return 2;//второй
-	}
-	else if (state == 1) {
-		return 1;//первый
+		//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬
+		state = CheckList(check);
+		check.clear();
+
+		if (state == 3) {
+			return 3;//Г­ГЁГ·ГјГї
+		}
+		else if (state == 2) {
+			return 2;//ГЇГ®ГЎГҐГ¤ГЁГ« 2
+		}
+		else if (state == 1) {
+			return 1;//ГЇГ®ГЎГҐГ¤ГЁГ« 1
+		}
 	}
 
-	//Побочная
-	for (int i = size.x; i > 0; i--) {
-		check.push_back(map[i][i]);
+	//4. ГЏГ°Г®ГўГҐГ°ГїГҐГ¬ ГўГ±ГҐ ГЇГ°Г ГўГ»ГҐ Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ
+	//ГЏГ®Г¤Г®Г·Г­Г Гї Г¤ГЁГ ГЈГ®Г­Г Г«Гј ГЁ Г­Г Г¤ Г­ГҐГ©
+	for (int j = size.y; j > 0; --j) {
+		for (int i = 0; i < size.x; ++i)
+		{
+			if (size.x - j - i >= 0) {
+				check.push_back(map[i][size.x - j - i]);
+			}
+		}
+
+		//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬
+		state = CheckList(check);
+		check.clear();
+
+		if (state == 3) {
+			return 3;//Г­ГЁГ·ГјГї
+		}
+		else if (state == 2) {
+			return 2;//ГЇГ®ГЎГҐГ¤ГЁГ« 2
+		}
+		else if (state == 1) {
+			return 1;//ГЇГ®ГЎГҐГ¤ГЁГ« 1
+		}
 	}
 
-	state = CheckList(check);
-	check.clear();
+	//ГЏГ®Г¤ ГЇГ®ГЎГ®Г·Г­Г®Г© Г¤ГЁГ ГЈГ®Г­Г Г«ГјГѕ
+	for (int j = 0; j < size.y; ++j) {
+		for (int i = 0; i < size.x; ++i)
+		{
+			if (size.x + j - i < size.x) {
+				check.push_back(map[i][size.x + j - i]);
+			}
+		}
 
-	if(state == 3) {
+		//ГЏГ°Г®ГўГҐГ°ГїГҐГ¬
+		state = CheckList(check);
+		check.clear();
+
+		if (state == 3) {
+			return 3;//Г­ГЁГ·ГјГї
+		}
+		else if (state == 2) {
+			return 2;//ГЇГ®ГЎГҐГ¤ГЁГ« 2
+		}
+		else if (state == 1) {
+			return 1;//ГЇГ®ГЎГҐГ¤ГЁГ« 1
+		}
+	}
+
+	if (CanMove())
+		return 0;//Г­ГҐГІ ГЇГ®ГЎГҐГ¤ГЁГІГҐГ«Гї
+	else
 		return 3;
-	}
-	else if (state == 2) {
-		return 2;
-	}
-	else if (state == 1) {
-		return 1;
-	}
-
-
-	if (CanMove()) {
-		return 0;
-	}
-	else return 3;//ничья
+	
 	return 0;
 }
 
@@ -303,10 +358,10 @@ bool GameMap::CanMove()
 	for (int i = 0; i < size.x; i++) {
 		for (int j = 0; j < size.y; j++) {
 			if (map[i][j] == 0) {
-				return true; //ячейка пустая
+				return true; //СЏС‡РµР№РєР° РїСѓСЃС‚Р°СЏ
 			}
 		}
 	}
 
-	return false; //почему??
+	return false; //РїРѕС‡РµРјСѓ??
 }

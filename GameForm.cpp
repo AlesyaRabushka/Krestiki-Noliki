@@ -4,7 +4,7 @@
 using namespace std;
 
 enum GameMode {
-    PvP, //игрок против игрока
+    PvP = 0, //игрок против игрока
     PvE //игрок против компа
 } gameMode;
 
@@ -57,28 +57,32 @@ void Krestikinoliki::GameForm::Update()
 
     if (state_game == 1) {
         if (gameMode == PvP) {
+            UpdateGameGrid();
             MessageBox::Show("Поздравляем Игрока1 с победой!", "Победа!");
         }
         else {
+            UpdateGameGrid();
             MessageBox::Show("Человечество не потеряно!! С победой, Игрок!", "Победа!");
         }
-        UpdateGameGrid();
+        //UpdateGameGrid();
 
         endGame = true;  //теперь игра точно окончена
     }
     else if (state_game == 2) {
-        if (gameMode = PvP) {
+        if (gameMode == PvP) {
+            UpdateGameGrid();
             MessageBox::Show("Поздравляем Игрока2 с победой!!", "Победа!");
         }
         else {
+            UpdateGameGrid();
             MessageBox::Show("Искусственный интеллект победил!! Человечество уже не то.", "Машины, вперед!");
         }
-        UpdateGameGrid();
+       // UpdateGameGrid();
 
         endGame = true; //конец игры
     }
     else if (state_game == 3) {
-        MessageBox::Show("Естественный и искусственный интеллект пока не решили, кто умнее!", "Десятки лет развиттия технологий ради этого");
+        MessageBox::Show("Естественный и искусственный интеллект пока не решили, кто умнее!", "Десятки лет развития технологий ради этого");
         UpdateGameGrid();
 
         endGame = true;
@@ -92,7 +96,7 @@ void Krestikinoliki::GameForm::Update()
     }
 
     //для AI
-    if (gameMode = PvE) {
+    if (gameMode == PvE) {
         if (currentPlayer == Computer) { //если ходил комп, то теперь ходит игрок
             status->Text = "Ход: Игрок!";
             currentPlayer = Player;
@@ -317,7 +321,7 @@ System::Void Krestikinoliki::GameForm::вернутьсяToolStripMenuItem_Click(System::
 
 System::Void Krestikinoliki::GameForm::выходToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    if (MessageBox::Show("Продолжить?", "Внимание!", MessageBoxButtons::YesNo) == Windows::Forms::DialogResult::Yes) {
+    if (MessageBox::Show("Подтвердить выход из игры?", "Внимание!", MessageBoxButtons::YesNo) == Windows::Forms::DialogResult::Yes) {
         Application::Exit();
     }
 }
