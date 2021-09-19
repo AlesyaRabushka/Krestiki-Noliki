@@ -257,7 +257,7 @@ int GameMap::CheckWinner()
 	for (int i = 0; i < size.x; ++i)
 	{
 		for (int j = 0; i + j < size.y; ++j) {
-			check.push_back(map[i + j][j]);
+			check.push_back(map[j][i + j]);
 		}
 
 		
